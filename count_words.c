@@ -26,7 +26,7 @@ int CountWords::addWord(const std::string& word){
 
 void CountWords::writeToFile(){
     FILE *f;
-    f=fopen("count.txt","a");
+    f=fopen("count.txt","w");
     for(const auto& [key, value] : countWords){
         fprintf(f,"%s = %d \n",key.c_str(),value);
     }
@@ -34,9 +34,9 @@ void CountWords::writeToFile(){
 }
 
 void CountWords::readFromFile(){
-    setlocale(LC_ALL, "Russian");
-    cout<<"start"<<endl;
     FILE *r;
+    r=fopen("count.txt","a");
+    fclose(r);
     r=fopen("count.txt","r");
     char word[50];
     int* count;
@@ -49,4 +49,9 @@ void CountWords::readFromFile(){
 
 CountWords::CountWords(){
     readFromFile();
+}
+
+
+int CountWords::getCountWord(const string &word) const{
+    return countWords.at(word);
 }

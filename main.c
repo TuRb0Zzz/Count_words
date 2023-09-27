@@ -8,10 +8,12 @@ using namespace std;
 
 
 int main(){
-    //setlocale(LC_ALL, "Russian");
+    //******************************
     CountWords words;
     const ParseText parseText("text.txt");
     words.InsertMap(parseText.ParseText::returnList());
     words.writeToFile();
+    //******************************
+
     return 0;
 }

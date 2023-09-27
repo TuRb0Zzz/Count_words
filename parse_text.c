@@ -7,11 +7,11 @@ using namespace std;
 
 
 ParseText::ParseText(const std::string& fileName){
-    //getFirstWord();
     FILE *f;
     f=fopen(fileName.c_str(),"r");
     parseFile(f);
     closeFile(f);
+    getFirstWord();
 }
 
 ParseText::ParseText(const std::string& fileName, unsigned long long int maxWords){
@@ -19,6 +19,7 @@ ParseText::ParseText(const std::string& fileName, unsigned long long int maxWord
     f=fopen(fileName.c_str(),"r");
     parseFileOgr(f,maxWords);
     closeFile(f);
+    getFirstWord();
 }
 
 void ParseText::parseFile(FILE *f){
@@ -51,7 +52,24 @@ void ParseText::parseFileOgr(FILE *f, unsigned long long maxWords){
     }
 }
 
-//const string ParseText::getFirstWord(){
-//    currentWord=0;
-//    return ;
-//}
+const string ParseText::getFirstWord(){
+    ParseText::currentWord=0;
+    return words.front();
+}
+
+const string ParseText::getWordAt(int index) const{
+    std::list<string> work = words;
+    work.resize(index);
+    return work.back();
+}
+
+const pair <std::string,bool> ParseText::getNextWord() const{
+   if(currentWord == words.size()-1){
+       const pair <string, bool> para (words.back(),true);
+       return para;
+   }
+   const pair <string, bool> para (getWordAt(currentWord),false);
+   currentWord+=1;
+   return para;
+}
+
