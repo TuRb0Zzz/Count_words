@@ -13,14 +13,13 @@ class CountWords {
     private :
         std::map<string,int> countWords;
     public :
-        CountWords();
-        void InsertMap(const std::list<string>& list);
+        //CountWords();
+        ~CountWords();
         void writeToFile();
-        void readFromFile();
         int getCountWord(const std::string& word) const;
         int addWord(const std::string& word);
-        //const std::list<std::pair<std::string, int >>& getMaxCountWord() : const;
-        //const std::list<std::pair<std::string, int >>& getMinCountWord() : const;
+        //const std::list<std::pair<std::string, int >> getMaxCountWord() : const;
+        //const std::list<std::pair<std::string, int >> getMinCountWord() : const;
 };
 
 

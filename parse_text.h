@@ -17,7 +17,6 @@ class ParseText {
         void parseFileOgr(FILE *f, unsigned long long int maxWords);
         void closeFile(FILE *f);
     public :
-        std::list<string> returnList() const;
         ParseText(const std::string& fileName);
         ParseText(const std::string& fileName, unsigned long long int maxWords);
         const string getFirstWord();

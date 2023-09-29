@@ -8,20 +8,9 @@ using namespace std;
 
 
 
-void CountWords::InsertMap(const std::list<string>& list){
-    for(auto item: list){
-        if(countWords.count(item)==0){
-            addWord(item);
-        }
-        else{
-            countWords[item]=countWords[item]+1;
-        }
-    }
-}
-
 int CountWords::addWord(const std::string& word){
-    countWords[word]=1;
-    return 0;
+    countWords[word]++;
+    return countWords[word];
 }
 
 void CountWords::writeToFile(){
@@ -33,25 +22,11 @@ void CountWords::writeToFile(){
     fclose(f);
 }
 
-void CountWords::readFromFile(){
-    FILE *r;
-    r=fopen("count.txt","a");
-    fclose(r);
-    r=fopen("count.txt","r");
-    char word[50];
-    int* count;
-    while(!feof(r)){
-        fscanf(r,"%s = %d",word,count);
-        countWords[word]=*count;
-    }
-    fclose(r);
-}
-
-CountWords::CountWords(){
-    readFromFile();
-}
-
 
 int CountWords::getCountWord(const string &word) const{
     return countWords.at(word);
+}
+
+CountWords::~CountWords(){
+    writeToFile();
 }

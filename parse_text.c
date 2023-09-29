@@ -36,10 +36,6 @@ void ParseText::closeFile(FILE *f){
     fclose(f);
 }
 
-std::list<string> ParseText::returnList() const{
-    return words;
-}
-
 void ParseText::parseFileOgr(FILE *f, unsigned long long maxWords){
     char word[50];
     std::string word1;
@@ -59,12 +55,20 @@ const string ParseText::getFirstWord(){
 
 const string ParseText::getWordAt(int index) const{
     std::list<string> work = words;
+    if (index==0 or index<0){
+        return work.front();
+    }
+    else{
+        if(index>words.size()){
+            return work.back();
+        }
+    }
     work.resize(index);
     return work.back();
 }
 
 const pair <std::string,bool> ParseText::getNextWord() const{
-   if(currentWord == words.size()-1){
+   if(currentWord == words.size()+1){
        const pair <string, bool> para (words.back(),true);
        return para;
    }

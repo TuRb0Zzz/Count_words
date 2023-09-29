@@ -11,9 +11,15 @@ int main(){
     //******************************
     CountWords words;
     const ParseText parseText("text.txt");
-    words.InsertMap(parseText.ParseText::returnList());
-    words.writeToFile();
     //******************************
+
+    while (true){
+        const auto &[string,islast] = parseText.getNextWord();
+        if (islast==true){
+            break;
+        }
+        words.addWord(string);
+    }
 
     return 0;
 }
