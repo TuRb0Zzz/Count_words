@@ -15,9 +15,11 @@ int CountWords::addWord(const std::string& word){
 
 void CountWords::writeToFile(){
     FILE *f;
-    f=fopen("count.txt","w");
+    f=fopen("result.txt","w");
+    int i=1;
     for(const auto& [key, value] : countWords){
-        fprintf(f,"%s = %d \n",key.c_str(),value);
+        fprintf(f,"%d) %s %d \n",i,key.c_str(),value);
+        i+=1;
     }
     fclose(f);
 }
