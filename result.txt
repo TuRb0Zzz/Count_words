@@ -1,4 +1,4 @@
-1) 123123 1 
-2) hello 2 
-3) qweqweqweqwe 1 
-4) wdaawd 1 
+1	123	1
+2	bro	2
+3	hello	1
+4	ivan	1
