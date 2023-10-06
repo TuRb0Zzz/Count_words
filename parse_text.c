@@ -28,6 +28,12 @@ void ParseText::parseFile(FILE *f){
     while (!feof(f)){
             fscanf(f,"%s ",word);
             word1=word;
+            for (int i = 0, len = word1.size(); i < len; i++){
+                   if (ispunct(word1[i])){
+                       word1.erase(i--, 1);
+                       len = word1.size();
+                   }
+            }
             words.push_back(word1);
     }
 }

@@ -20,6 +20,5 @@ int main(){
         }
         words.addWord(string);
     }
-
     return 0;
 }
