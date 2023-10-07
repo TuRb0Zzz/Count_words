@@ -7,51 +7,77 @@ using namespace std;
 
 
 ParseText::ParseText(const std::string& fileName){
-    FILE *f;
-    f=fopen(fileName.c_str(),"r");
-    parseFile(f);
-    closeFile(f);
+    openFile(fileName);
+    parseFile();
+    closeFile();
     getFirstWord();
 }
 
 ParseText::ParseText(const std::string& fileName, unsigned long long int maxWords){
-    FILE *f;
-    f=fopen(fileName.c_str(),"r");
-    parseFileOgr(f,maxWords);
-    closeFile(f);
+    openFile(fileName);
+    parseFileOgr(maxWords);
+    closeFile();
     getFirstWord();
 }
 
-void ParseText::parseFile(FILE *f){
-    char word[50];
+void ParseText::parseFile(){
+    char word[64];
     std::string word1;
     while (!feof(f)){
             fscanf(f,"%s ",word);
             word1=word;
-            for (int i = 0, len = word1.size(); i < len; i++){
-                   if (ispunct(word1[i])){
-                       word1.erase(i--, 1);
-                       len = word1.size();
-                   }
+            string s="";
+            for(int i=0; i<word1.size();i++){
+                if (!ispunct(word1[i])){
+                    s+=word1[i];
+                }
+                else{
+                    if (s!=""){
+                        words.push_back(s);
+                    }
+                    s="";
+                }
             }
-            words.push_back(word1);
+            if (s!=""){
+                words.push_back(s);
+            }
     }
+
 }
 
-void ParseText::closeFile(FILE *f){
+void ParseText::closeFile(){
     fclose(f);
 }
 
-void ParseText::parseFileOgr(FILE *f, unsigned long long maxWords){
-    char word[50];
+void ParseText::openFile(const string &fileName){
+    f=fopen(fileName.c_str(),"r");
+}
+
+
+void ParseText::parseFileOgr(unsigned long long maxWords){
+    char word[64];
     std::string word1;
-    long long int count=0;
-    while (!feof(f) and count<= maxWords){
+    long long i=0;
+    while (!feof(f) and i<maxWords){
             fscanf(f,"%s ",word);
             word1=word;
-            words.push_back(word1);
-            count+=1;
+            string s="";
+            for(int i=0; i<word1.size();i++){
+                if (!ispunct(word1[i])){
+                    s+=word1[i];
+                }
+                else{
+                    if (s!=""){
+                        words.push_back(s);
+                    }
+                    s="";
+                }
+            }
+            if (s!=""){
+                words.push_back(s);
+            }
     }
+    i+=1;
 }
 
 const string ParseText::getFirstWord(){
@@ -74,7 +100,7 @@ const string ParseText::getWordAt(int index) const{
 }
 
 const pair <std::string,bool> ParseText::getNextWord() const{
-   if(currentWord == words.size()+1){
+   if(currentWord == words.size()){
        const pair <string, bool> para (words.back(),true);
        return para;
    }

@@ -11,11 +11,13 @@ using namespace std;
 
 class ParseText {
     private :
+        FILE *f;
         std::list<std::string> words;
         inline static int currentWord;
-        void parseFile(FILE *f);
-        void parseFileOgr(FILE *f, unsigned long long int maxWords);
-        void closeFile(FILE *f);
+        void parseFile();
+        void openFile(const std::string& fileName);
+        void parseFileOgr(unsigned long long int maxWords);
+        void closeFile();
     public :
         ParseText(const std::string& fileName);
         ParseText(const std::string& fileName, unsigned long long int maxWords);
