@@ -29,7 +29,7 @@ void ParseText::parseFile(){
             string s="";
             for(int i=0; i<word1.size();i++){
                 if (!ispunct(word1[i])){
-                    s+=word1[i];
+                    s+=tolower(word1[i]);
                 }
                 else{
                     if (s!=""){
@@ -64,7 +64,7 @@ void ParseText::parseFileOgr(unsigned long long maxWords){
             string s="";
             for(int i=0; i<word1.size();i++){
                 if (!ispunct(word1[i])){
-                    s+=word1[i];
+                    s+=tolower(word1[i]);
                 }
                 else{
                     if (s!=""){
@@ -87,15 +87,10 @@ const string ParseText::getFirstWord(){
 
 const string ParseText::getWordAt(int index) const{
     std::list<string> work = words;
-    if (index==0 or index<0){
-        return work.front();
+    if (index<0 or index>words.size()){
+        return "";
     }
-    else{
-        if(index>words.size()){
-            return work.back();
-        }
-    }
-    work.resize(index);
+    work.resize(index+1);
     return work.back();
 }
 
