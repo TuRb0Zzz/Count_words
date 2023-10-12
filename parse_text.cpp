@@ -104,3 +104,4 @@ const pair <std::string,bool> ParseText::getNextWord() const{
    return para;
 }
 
+

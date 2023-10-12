@@ -26,7 +26,13 @@ void CountWords::writeToFile(){
 
 
 int CountWords::getCountWord(const string &word) const{
-    return countWords.at(word);
+    if (countWords.count(word)!=0){
+        return countWords.at(word);
+    }
+    else{
+        return 0;
+    }
+
 }
 
 std::list<std::pair<std::string, int >> CountWords::getMaxCountWord(){
