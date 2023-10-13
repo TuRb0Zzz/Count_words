@@ -95,7 +95,7 @@ const string ParseText::getWordAt(int index) const{
 }
 
 const pair <std::string,bool> ParseText::getNextWord() const{
-   if(currentWord == words.size()){
+   if(currentWord == words.size()-1){
        const pair <string, bool> para (words.back(),true);
        return para;
    }
